@@ -1,0 +1,10 @@
+{
+  "name": "usersupport",
+  "version": "0.1.0",
+  "description": "AI-based virtual IT User Support team",
+  "skills": [
+    {
+      "path": "plugins/UserSupport/skills/usersupport"
+    }
+  ]
+}

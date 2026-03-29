@@ -1,0 +1,10 @@
+{
+  "name": "knowledge",
+  "version": "0.1.0",
+  "description": "AI-based virtual IT Knowledge management team",
+  "skills": [
+    {
+      "path": "plugins/Knowledge/skills/knowledge"
+    }
+  ]
+}

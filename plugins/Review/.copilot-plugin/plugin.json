@@ -1,0 +1,10 @@
+{
+  "name": "review",
+  "version": "0.1.0",
+  "description": "AI-based virtual IT Review team",
+  "skills": [
+    {
+      "path": "plugins/Review/skills/review"
+    }
+  ]
+}

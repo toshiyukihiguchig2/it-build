@@ -1,0 +1,25 @@
+{
+  "name": "it-support",
+  "version": "0.1.0",
+  "description": "AI-based virtual IT operations Support",
+  "commands": [
+    {
+      "name": "support",
+      "description": "運用サポートコンダクターを起動し、依頼を部門に振り分ける"
+    }
+  ],
+  "skills": [
+    {
+      "path": "plugins/Support/skills/support"
+    },
+    {
+      "path": "plugins/Review/skills/review"
+    },
+    {
+      "path": "plugins/UserSupport/skills/usersupport"
+    },
+    {
+      "path": "plugins/Knowledge/skills/knowledge"
+    }
+  ]
+}
