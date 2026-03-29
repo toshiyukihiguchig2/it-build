@@ -57,11 +57,26 @@ it-build/
 │   ├── network.md           # ネットワーク・インフラ構成
 │   ├── rules.md             # 社内ルール・申請フロー
 │   └── output-format.md     # 部門別出力フォーマット定義
+├── logs/                    # 本番ログ（ローカル専用・gitignore）
+│   ├── README.md            # ログ配置手順・命名規則
+│   └── {YYYYMMDD}-{システム名}/   # 取得したログを配置
+├── incidents/               # 過去事例記録（コミット対象・知識DB）
+│   ├── README.md            # 記録方法・事例一覧
+│   ├── _template.md         # 事例記録テンプレート
+│   └── {日付}-{システム}-{概要}.md
+├── systems/                 # 業務システムのTRUNK資材（ローカル専用）
+│   ├── README.md            # 同期手順
+│   ├── _template/           # 新システム追加時のテンプレート
+│   │   └── README.md
+│   └── {システム名}/
+│       ├── README.md        # システム概要・SVNパス（コミット対象）
+│       └── src/             # TRUNK資材（.gitignoreでコミット対象外）
 ├── examples/                # サンプル依頼集
 │   ├── support-examples.md
 │   ├── review-examples.md
 │   ├── usersupport-examples.md
 │   └── knowledge-examples.md
+├── .gitignore               # systems/*/src/ を除外
 ├── README.md
 └── LICENSE
 ```
@@ -106,9 +121,21 @@ it-build/
 | [context/network.md](context/network.md) | IPレンジ・サーバ一覧・VPN情報 |
 | [context/rules.md](context/rules.md) | 変更管理・障害対応・セキュリティルール |
 
-### 2. GitHub Copilot に読み込ませる
+### 2. 業務システムの資材を配置する（コードレビュー・影響調査時）
+
+依頼対象のシステムが確定したら、`systems/` に資材を配置してから `/support` を使う。
+
+```bash
+# SVN からエクスポート
+svn export svn://[サーバ]/[リポジトリ]/[システム名]/trunk systems/[システム名]/src --force
+```
+
+新システムを追加する場合は `systems/_template/README.md` をコピーして情報を記入する。
+
+### 3. GitHub Copilot に読み込ませる
 
 GitHub Copilot Chat で `/support` と入力して起動する。
+資材が `systems/{システム名}/src/` にあれば、Copilot が自動的にコードを参照する。
 
 ---
 
@@ -116,14 +143,18 @@ GitHub Copilot Chat で `/support` と入力して起動する。
 
 ### 高優先度
 - [ ] `context/systems.md` に社内システム情報を記入する
+- [ ] 過去事例を `incidents/` に記録し始める（`_template.md` を使用）
 - [ ] `context/tech-stack.md` に技術スタックを記入する
 - [ ] `context/network.md` にネットワーク・サーバ構成を記入する
 - [ ] `context/rules.md` に社内ルール・申請フローを記入する
+- [ ] `context/codebase.md` に業務システム一覧とフォルダ対応を記入する
+- [ ] 主要システム分の `systems/{システム名}/README.md` を作成する（`_template/README.md` をコピーして編集）
 
 ### 中優先度
 - [ ] 各部門ファイル（`departments/*.md`）を実務内容に合わせてカスタマイズする
 - [ ] `examples/` のサンプル依頼を実際によく使う依頼に更新する
 - [ ] 出力フォーマット（`context/output-format.md`）を社内標準に合わせて調整する
+- [ ] よく使う業務システムの資材を `systems/{システム名}/src/` に配置して動作確認する
 
 ### 低優先度
 - [ ] `CHANGELOG.md` を作成してバージョン管理を始める
